@@ -20,7 +20,32 @@ module Blunder
     # it actually will check for corresponding tables existing
     #and if those are missing it will create them
     def Config.setup
-      puts "here will be created missing tables"
+      begin
+        Blunder::blunders_model
+      rescue
+        ActiveRecord::ConnectionAdapters::SchemaStatements.create_table @blunders_table.tableize.to_sym do |t|
+          t.column  :drop_point,  :string,  :limit => 255,  :default => nil, :null => true
+          t.column  :code,        :string,  :limit => 255,  :default => nil, :null => true
+          t.timestamps
+        end
+      end
+      
+      begin
+        Blunder::blunder_logs_model
+      rescue
+        ActiveRecord::ConnectionAdapters::SchemaStatements.create_table @blunder_logs_table.tableize.to_sym do |t|
+          t.column    :source_type, :string,  :limit => 255
+          t.column    :source_id,   :string,  :limit => 255
+          t.column    :factory_fault_id, :integer, :default => nil, :null => true
+          t.column    :log_details,  :text, :default => nil,  :null => true
+          t.timestamps
+        end
+      end
+    end
+
+    #that function will be executed in case a corresponding tables are missing
+    def Config.execution
+      raise 'Error: Please check whether you have executed Bundler::Config.setup'
     end
   end
 end

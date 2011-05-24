@@ -51,10 +51,10 @@ module Blunder::ClassMethods
       scoped_blunders = scoped_blunders.scoped(conditions)
     end
     scoped_blunders.find(  :all,
-                              :conditions => {
-                                :source_type => blunder_object_name(object),
-                                :source_id => blunder_object_id(object)
-                              })
+                           :conditions => {
+                             :source_type => blunder_object_name(object),
+                             :source_id => blunder_object_id(object)
+                           })
   end
 
   #returns an appropriate object name
@@ -70,18 +70,18 @@ module Blunder::ClassMethods
   #returns an model that handles drop points descriptions
   def blunders_model
     begin
-      eval @blunders_table
+      @blunders_table.to_s.constantize
     rescue
-      raise 'Wrong table was specified for blunders'
+      Blunder::Config.execution
     end
   end
 
   #return a model that will handles the logs
   def blunder_logs_model
     begin
-      eval @blunder_logs_table
+      @blunder_logs_table.to_s.constantize
     rescue
-      raise 'Wrong table was specified for blunder logs'
+      Blunder::Config.execution
     end
   end
 

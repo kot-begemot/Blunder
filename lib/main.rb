@@ -3,5 +3,6 @@
 
 require 'blunder'
 
+
 Blunder::Config.setup
 BError.setup

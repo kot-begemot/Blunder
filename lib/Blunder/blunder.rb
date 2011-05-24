@@ -1,15 +1,19 @@
 #that model contains all methods
 #that would be available to any object that will include it
 module Blunder
+
+  extend ClassMethods
+  extend MultiMixer
+  extend Config
+
   def self.included(base) #:nodoc:
-    base.extend ClassMethods
-    base.extend MultiMixer
+    
     base.send 'include', MultiMixer
     base.class_eval do
       attr_accessor :blunders_table
       attr_accessor :blunder_logs_table
     end
-    base.extend Config
+    
     base.instance_eval do
       #current instance drop point
       attr_accessor :blunder_current_drop_point
