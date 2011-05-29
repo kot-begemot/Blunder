@@ -7,6 +7,7 @@ class BError
 
   blunder_drop_point 'void'
 
+
   @blunder_errors_on_fly = true
   @blunder_fine_errors = false
 

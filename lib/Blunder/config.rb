@@ -5,12 +5,14 @@ module Blunder
 
     #tables that will store all information about any failures
     #that table store drop points and its descriptions
+    #TODO: should be made as a class variable
     @blunders_table = 'FactoryFault'
     #this table will store any instance errors
     @blunder_logs_table = 'FaultyLogs'
 
     #if this is set, then the errors will be created if it is not appears
     #in the list
+    #should be made as a class variable
     @blunder_errors_on_fly = false
     #if this is set then if the error is not presented for the current
     #drop point it will not search for appropriate in other drop points

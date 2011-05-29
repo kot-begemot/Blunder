@@ -2,23 +2,24 @@
 #that would be available to any object that will include it
 module Blunder
 
-  extend ClassMethods
-  extend MultiMixer
-  extend Config
-
   def self.included(base) #:nodoc:
     
+    base.extend ClassMethods
+    base.extend MultiMixer
+    base.extend Config
+
     base.send 'include', MultiMixer
     base.class_eval do
       attr_accessor :blunders_table
       attr_accessor :blunder_logs_table
     end
-    
+
     base.instance_eval do
       #current instance drop point
       attr_accessor :blunder_current_drop_point
       alias_method :old_method_missing, :method_missing if private_methods.include?('method_missing')
       alias_method :method_missing, :blunder_method_missing
+      #Config.blunder_init_default self
     end
   end
 

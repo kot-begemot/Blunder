@@ -4,5 +4,5 @@
 require 'blunder'
 
 
-Blunder::Config.setup
-BError.setup
+#Blunder::Config.setup
+#BError.setup
