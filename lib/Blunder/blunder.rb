@@ -10,8 +10,8 @@ module Blunder
 
     base.send 'include', MultiMixer
     base.class_eval do
-      attr_accessor :blunders_table
-      attr_accessor :blunder_logs_table
+      attr_reador :blunders_table
+      attr_reador :blunder_logs_table
     end
 
     base.instance_eval do
